@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Achievements\Achievement;
+use App\Models\Achievement;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -81,6 +81,21 @@ class User extends Authenticatable
     public function achievements()
     {
         return $this->belongsToMany(Achievement::class, 'user_achievements')->withTimestamps();
+    }
+
+    public function hasBadge(string $badgeName): bool
+    {
+        return $this->badge()->where('name', $badgeName)->exists();
+    }
+
+    public function badge()
+    {
+        return $this->belongsTo(Badge::class);
+    }
+
+    public function getNextBadge()
+    {
+        return Badge::where('achievements_required', '>', $this->achievements->count())->first();
     }
 }
 

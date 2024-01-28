@@ -15,25 +15,25 @@ class UserAchievementsTableSeeder extends Seeder
     {
         $data = [
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'achievement_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'achievement_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'achievement_id' => 6,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'achievement_id' => 7,
                 'created_at' => now(),
                 'updated_at' => now(),

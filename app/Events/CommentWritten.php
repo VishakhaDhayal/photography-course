@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 
@@ -17,8 +18,9 @@ class CommentWritten
      *
      * @return void
      */
-    public function __construct(Comment $comment)
+    public function __construct(Comment $comment,User $user)
     {
         $this->comment = $comment;
+        $this->user = $user;
     }
 }

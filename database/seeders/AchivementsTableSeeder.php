@@ -16,43 +16,43 @@ class AchivementsTableSeeder extends Seeder
         $achievements=[
             [
                 'name'=>'First Lesson Watched',
-                'slug'=>'first_lesson_watched',
+                'slug'=>'lessons_watched_1',
             ],
             [
                 'name'=>'5 Lessons Watched',
-                'slug'=>'5_lessons_watched',
+                'slug'=>'lessons_watched_5',
             ],
             [
                 'name'=>'10 Lessons Watched',
-                'slug'=>'10_lessons_watched',
+                'slug'=>'lessons_watched_10',
             ],
             [
                 'name'=>'25 Lessons Watched',
-                'slug'=>'25_lessons_watched',
+                'slug'=>'lessons_watched_25',
             ],
             [
                 'name'=>'50 Lessons Watched',
-                'slug'=>'50_lessons_watched',
+                'slug'=>'lessons_watched_50',
             ],
             [
                 'name'=>'First Comment Written',
-                'slug'=>'first_comment_written',
+                'slug'=>'comments_written_1',
             ],
             [
                 'name'=>'3 Comments Written',
-                'slug'=>'3_comments_written',
+                'slug'=>'comments_written_3',
             ],
             [
                 'name'=>'5 Comments Written',
-                'slug'=>'5_comments_written',
+                'slug'=>'comments_written_5',
             ],
             [
                 'name'=>'10 Comments Written',
-                'slug'=>'10_comments_written',
+                'slug'=>'comments_written_10',
             ],
             [
                 'name'=>'20 Comments Written',
-                'slug'=>'20_comments_written',
+                'slug'=>'comments_written_20',
             ],
         ];
 
