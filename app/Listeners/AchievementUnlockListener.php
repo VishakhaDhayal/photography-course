@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Achievements\Comment\FirstCommentWritten;
+use App\Achievements\Comment\FiveCommentsWritten;
 use App\Achievements\Comment\TenCommentsWritten;
 use App\Achievements\Comment\ThreeCommentsWritten;
 use App\Achievements\Comment\TwentyCommentsWritten;
@@ -38,13 +39,18 @@ class AchievementUnlockListener
     {
         return [
             'lesson' => [
-                0 => FirstLessonWatched::class,
                 1 => FirstLessonWatched::class,
                 5 => FiveLessonWatched::class,
+                10 => TenLessonsWatched::class,
+                25 => TwentyFiveLessonsWatched::class,
+                50 => FiftyLessonsWatched::class
             ],
             'comment' => [
-                0 => FirstCommentWritten::class,
                 1 => FirstCommentWritten::class,
+                3 => ThreeCommentsWritten::class,
+                5 => FiveCommentsWritten::class,
+                10 => TenCommentsWritten::class,
+                20 => TwentyCommentsWritten::class
             ],
         ];
     }
@@ -64,37 +70,33 @@ class AchievementUnlockListener
             $this->handleAchievements($user, $lessonsWatchedCount, 'lesson');
         }elseif ($event instanceof CommentWritten){
             $this->handleAchievements($user, $commentsWrittenCount, 'comment');
-        }elseif ($event instanceof AchievementUnlocked){
-            $this->handleAchievements($user, $commentsWrittenCount, 'comment');
         }
+//        elseif ($event instanceof AchievementUnlocked){
+//            $this->handleAchievements($user, $commentsWrittenCount, 'comment');
+//        }
     }
 
     private function handleAchievements(User $user, int $count, string $type): void
     {
         $config = $this->getAchievementConfig()[$type];
+
         foreach ($config as $condition => $achievementType) {
             $achievementSlug = sprintf('lessons_watched_%d', $condition);
-            info('$achievementSlug', [
-                '$achievementSlug' => $achievementSlug,
-            ]);
-            info('check user ach', [
-                '$achievementSlug' => $user->hasAchievement($achievementSlug),
-            ]);
-            info('$count', [
-                '$count' => $count >= $condition,
-                'condition' => $condition > 0
-            ]);
-            info('$count', [
-                '$count' => $count,
-                'condition' => $condition
-            ]);
-
             //condition 1
             //count 0
 
-            if ($count >= $condition && !$user->hasAchievement($achievementType)) {
+            if ($count === 0 && !$user->hasAchievement($achievementType)) {
+                info('condition pass 00000', [
+                    'Achievements' => $achievementSlug,
+                    '$count' => $count,
+                    'condition' => $condition
+                ]);
+                $this->unlockAchievement($user, $achievementType);
+            } elseif ($count >= $condition && !$user->hasAchievement($achievementType)) {
                 info('condition pass', [
-                    'Achievements' => 'test 1',
+                    'Achievements' => $achievementSlug,
+                    '$count' => $count,
+                    'condition' => $condition
                 ]);
                 $this->unlockAchievement($user, $achievementType);
             }
@@ -116,21 +118,21 @@ class AchievementUnlockListener
 
         $achievementsCount = $user->achievements()->count();
 
-        info('$achievementsCount', [
+        info('Achievementscount', [
             'Achievements' => $achievementsCount,
         ]);
-        $this->checkBadges($achievementsCount,$user);
+        //$this->checkBadges($achievementsCount,$user);
     }
 
     private function checkBadges(int $achievementsCount,User $user,)
     {
         foreach (Config::get('badges') as $badgeSlug => $badgeDetails) {
-            info('$achievementsCount', [
-                'Achievements' => $achievementsCount,
-                'achievements_required' => $badgeDetails['achievements_required'],
-                'name' => $badgeDetails['name'],
-                'badgeslug' => $badgeSlug
-            ]);
+//            info('$achievementsCount', [
+//                'Achievements' => $achievementsCount,
+//                'achievements_required' => $badgeDetails['achievements_required'],
+//                'name' => $badgeDetails['name'],
+//                'badgeslug' => $badgeSlug
+//            ]);
 
             if ($badgeSlug === 'beginner' && !$user->hasBadge($badgeSlug)) {
                 $this->assignBeginnerBadge($user,$badgeSlug);
