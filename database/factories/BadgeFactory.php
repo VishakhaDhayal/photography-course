@@ -17,11 +17,9 @@ class BadgeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word,
-            'min_achievements_required' => $this->faker->numberBetween(1, 10),
-            'max_achievements_required' => $this->faker->numberBetween(1, 50),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'name' => 'Beginner',
+            'min_achievements_required' => 0,
+            'max_achievements_required' => 3,
         ];
     }
 }

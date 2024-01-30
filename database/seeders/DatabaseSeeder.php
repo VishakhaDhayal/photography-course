@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         $this->call([
+            BadgeTableSeeder::class,
             UserTableSeeder::class,
             AchivementsTableSeeder::class,
-            BadgeTableSeeder::class,
             UserAchievementsTableSeeder::class,
             LessonUserTableSeeder::class,
             CommentTableSeeder::class

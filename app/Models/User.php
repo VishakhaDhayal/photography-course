@@ -67,6 +67,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Lesson::class)->wherePivot('watched', true);
     }
+    public function writtenComments()
+    {
+        return $this->belongsToMany(Comment::class, 'comment_user')->withTimestamps();
+    }
 
     /*
      * If user has specific achievement
@@ -90,12 +94,14 @@ class User extends Authenticatable
 
     public function badge()
     {
-        return $this->belongsTo(Badge::class);
+        return $this->belongsTo(Badge::class,'badge_id');
     }
 
     public function getNextBadge()
     {
-        return Badge::where('achievements_required', '>', $this->achievements->count())->first();
+        return Badge::where('min_achievements_required', '>', $this->achievements->count())
+            ->orderBy('min_achievements_required')
+            ->first();
     }
 }
 

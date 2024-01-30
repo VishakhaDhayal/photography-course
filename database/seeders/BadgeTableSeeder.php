@@ -18,19 +18,23 @@ class BadgeTableSeeder extends Seeder
         $badges=[
             [
                 'name'=>'Beginner',
-                'achievements_required'=>0,
+                'min_achievements_required'=>0,
+                'max_achievements_required'=>3,
             ],
             [
                 'name'=>'Intermediate',
-                'achievements_required'=>4,
+                'min_achievements_required'=>4,
+                'max_achievements_required'=>7,
             ],
             [
                 'name'=>'Advanced',
-                'achievements_required'=>8,
+                'min_achievements_required'=>8,
+                'max_achievements_required'=>9,
             ],
             [
                 'name'=>'Master',
-                'achievements_required'=>10,
+                'min_achievements_required'=>10,
+                'max_achievements_required'=>50,
             ],
         ];
 

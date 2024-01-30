@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Badge;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,8 +14,10 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $firstBadge=Badge::first();
         User::factory()
             ->count(5)
-            ->create();
+            ->create(['badge_id' => $firstBadge->id]);
+
     }
 }

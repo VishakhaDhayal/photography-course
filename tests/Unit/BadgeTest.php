@@ -10,14 +10,14 @@ use Tests\TestCase;
 
 class BadgeTest extends TestCase
 {
-    use RefreshDatabase;
 
     public function testAssignBadge()
     {
         foreach (Config::get('badges') as $badgeSlug => $badgeData) {
             info("Achievements assigned for");
 
-            $user = User::factory()->create();
+            $defaultBadge = Badge::factory()->make();
+            $user = User::factory()->create(['badge_id' => $defaultBadge->id]);
             info("Achievements assigned for");
 
 
