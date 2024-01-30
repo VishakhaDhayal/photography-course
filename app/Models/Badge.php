@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Badge extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name', 'min_achievements_required','max_achievements_required'];
 
     /**
      * Define the relationship with users through the badges_users pivot table.
@@ -16,6 +16,6 @@ class Badge extends Model
      */
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class,'badge_id');
     }
 }

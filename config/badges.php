@@ -2,19 +2,23 @@
 
 return [
     'beginner' => [
-        'achievements_required' => 0,
+        'min_achievements' => 0,
+        'max_achievements' => 3,
         'name' => 'Beginner',
     ],
     'intermediate' => [
-        'achievements_required' => 4,
+        'min_achievements' => 4,
+        'max_achievements' => 7,
         'name' => 'Intermediate',
     ],
     'advanced' => [
-        'achievements_required' => 8,
+        'min_achievements' => 8,
+        'max_achievements' => 9,
         'name' => 'Advanced',
     ],
     'master' => [
-        'achievements_required' => 10,
+        'min_achievements' => 10,
+        'max_achievements' => 50,  //add the max limit in env file.This is for testing
         'name' => 'Master',
     ],
 ];

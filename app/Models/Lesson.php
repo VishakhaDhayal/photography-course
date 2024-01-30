@@ -15,6 +15,11 @@ class Lesson extends Model
      * @var array
      */
     protected $fillable = [
-        'title'
+        'title',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'lesson_user')->withTimestamps();
+    }
 }

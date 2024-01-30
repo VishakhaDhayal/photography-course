@@ -6,6 +6,7 @@ use App\Events\AchievementUnlocked;
 use App\Events\CommentWritten;
 use App\Events\LessonWatched;
 use App\Listeners\AchievementUnlockListener;
+use App\Listeners\EventsListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -23,10 +24,10 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         LessonWatched::class => [
-            AchievementUnlockListener::class,
+            EventsListener::class,
         ],
         CommentWritten::class => [
-            AchievementUnlockListener::class,
+            EventsListener::class,
         ],
        AchievementUnlocked::class => [
            AchievementUnlockListener::class,

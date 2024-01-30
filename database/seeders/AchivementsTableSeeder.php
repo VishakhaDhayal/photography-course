@@ -15,7 +15,7 @@ class AchivementsTableSeeder extends Seeder
     {
         $achievements=[
             [
-                'name'=>'First Lesson Watched',
+                'name'=>'1 Lessons Watched',
                 'slug'=>'lessons_watched_1',
             ],
             [
