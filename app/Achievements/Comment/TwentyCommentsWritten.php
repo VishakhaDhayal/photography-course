@@ -5,7 +5,11 @@ use App\Events\AchievementUnlocked;
 use App\Models\User;
 use App\Achievements\Achievement;
 
-class TwentyCommentsWritten implements Achievement{
+class TwentyCommentsWritten implements Achievement
+{
+    private const ACHIEVEMENT_NAME = '20 Comments Written';
+    private const ACHIEVEMENT_SLUG = 'comments_written_20';
+
 
     /**
      * Unlock the First Comment Written achievement for user.
@@ -15,15 +19,15 @@ class TwentyCommentsWritten implements Achievement{
      */
     public function unlock(User $user): void
     {
-        if (!$user->hasAchievement('comments_written_20')) {
+        if (!$user->hasAchievement(self::ACHIEVEMENT_SLUG)) {
             $user->achievements()->create([
-                'name' => 'Twenty Comments Written',
-                'slug' => 'comments_written_20',
+                'name' => self::ACHIEVEMENT_NAME,
+                'slug' => self::ACHIEVEMENT_SLUG,
             ]);
-            info('comments_written_20', [
+            info(self::ACHIEVEMENT_SLUG, [
                 'Achievements' => $user,
             ]);
-            event(new AchievementUnlocked('Twenty Comments Written', $user));
+            event(new AchievementUnlocked(self::ACHIEVEMENT_NAME, $user));
         }
     }
 }

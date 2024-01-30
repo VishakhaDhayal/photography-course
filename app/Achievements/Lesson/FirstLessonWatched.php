@@ -7,6 +7,8 @@ use App\Achievements\Achievement;
 
 class FirstLessonWatched implements Achievement
 {
+    private const ACHIEVEMENT_NAME = '1 Lessons Watched';
+    private const ACHIEVEMENT_SLUG = 'lessons_watched_1';
 
     /**
      * Unlock the First Lesson Watched achievement for user.
@@ -16,17 +18,17 @@ class FirstLessonWatched implements Achievement
      */
    public function unlock(User $user):void
    {
-       if (!$user->hasAchievement('lessons_watched_1')) {
+       if (!$user->hasAchievement(self::ACHIEVEMENT_SLUG)) {
            $user->achievements()->create([
-               'name' => 'First Lesson Watched',
-               'slug' => 'lessons_watched_1',
+               'name' => self::ACHIEVEMENT_NAME,
+               'slug' => self::ACHIEVEMENT_SLUG,
            ]);
 
-           info('firstlessonwatched', [
+           info(self::ACHIEVEMENT_SLUG, [
                'Achievements' => $user->achievements->pluck('name')->toArray(),
            ]);
 
-           event(new AchievementUnlocked('First Lesson Watched', $user));
+           event(new AchievementUnlocked(self::ACHIEVEMENT_NAME, $user));
        }
    }
 }
